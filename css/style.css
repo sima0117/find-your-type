@@ -1,0 +1,602 @@
+/* --- 全体設定と基本スタイル --- */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    line-height: 1.8;
+    color: var(--text-color);
+    background-color: var(--base-color);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--white-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* --- ヘッダーとフッターの共通スタイル --- */
+.site-header, .site-footer {
+    text-align: center;
+    padding: 20px;
+}
+.site-header a {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--main-color);
+    text-decoration: none;
+}
+.site-footer p {
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* --- 各ページの主要要素のスタイル --- */
+header h1 {
+    font-size: 2em;
+    color: var(--main-color);
+    text-align: center;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+main p {
+    font-size: 1.1em;
+}
+
+/* --- ボタンの共通スタイル --- */
+.button-link, #submit-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--main-color);
+    color: var(--white-color);
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 20px;
+}
+.button-link:hover, #submit-button:hover {
+    background-color: #4a6a91;
+    transform: translateY(-2px);
+}
+
+/* --- ボタン中央揃え --- */
+#start-screen main, #quiz-form {
+    text-align: center;
+}
+
+/* --- quiz.html のスタイル --- */
+.question-block {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+}
+
+/* ▼▼▼ 質問文のレイアウトを修正 ▼▼▼ */
+.question-text {
+    text-align: left; /* テキストを左揃えに */
+    margin-bottom: 15px;
+}
+.question-number {
+    font-weight: bold;
+    display: block; /* ここで改行される */
+}
+.question-content {
+    display: block;
+    font-size: 1.1em;
+}
+
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* 間隔を少し狭くする */
+}
+
+/* ▼▼▼ ラベルのスタイルを修正 ▼▼▼ */
+.slider-label {
+    font-size: 0.8em; /* フォントを少し小さく */
+    color: #555;
+    white-space: nowrap; /* 折り返しを防ぐ */
+}
+
+.slider {
+    width: 100%;
+}
+
+/* --- 結果ページのスタイル --- */
+#result-page header h1 {
+    font-size: 1.8em;
+}
+#result-page header h2 {
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #555;
+    text-align: center;
+    border: 1px solid var(--light-gray);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 0;
+}
+.result-image-container {
+    text-align: center;
+    margin: 30px 0;
+}
+.result-image-container img {
+    max-width: 250px;
+    height: auto;
+    border-radius: 50%;
+    border: 5px solid var(--accent-color);
+}
+.result-content h3 {
+    font-size: 1.3em;
+    color: var(--main-color);
+    border-left: 5px solid var(--accent-color);
+    padding-left: 10px;
+}
+#result-page footer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* --- スマートフォン用の調整 (レスポンシブ対応) --- */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 15px;
+    }
+    header h1 {
+        font-size: 1.6em;
+    }
+    main p {
+        font-size: 1em;
+    }
+    .slider-label {
+        font-size: 0.7em;
+    }
+}
+
+/* --- 質問文のレイアウト調整 --- */
+.question-block {
+    text-align: left; /* ブロック全体を左揃えに */
+}
+
+.question-number {
+    font-weight: bold;
+    display: block; /* この指定により、ここで改行されます */
+    margin-bottom: 5px; /* 質問文との間に少し余白を追加 */
+}
+
+.question-content {
+    line-height: 1.6; /* 質問文が長い場合に備えて行間を調整 */
+}
+
+/* --- ボタン中央揃えの再調整 --- */
+/* quiz.htmlの「結果を見る」ボタンのみを中央揃えにする */
+#quiz-form {
+    text-align: center;
+}
+
+/* --- ヘッダーのスタイル --- */
+.site-header {
+    padding: 20px 0;
+    border-bottom: 2px solid var(--accent-color);
+    margin-bottom: 30px;
+}
+
+.site-header a {
+    font-size: 1.8em;
+    font-weight: 700; /* 太字 */
+    color: var(--main-color);
+    text-decoration: none;
+    letter-spacing: 1px; /* 文字間隔を少し広げる */
+}
+
+/* --- フッターのスタイル --- */
+.site-footer {
+    padding: 30px 0 10px 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--light-gray);
+    color: #777;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* --- スライダー用のスタイル（カラー版） --- */
+.slider-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.slider-label {
+    font-size: 0.8em;
+    color: #555;
+    white-space: nowrap;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    outline: none;
+    border-radius: 4px;
+    margin: 0;
+    
+    /* 溝の色をメインカラーのネイビーと、中央の目盛り線で表現 */
+    background-image: linear-gradient(to right,
+        var(--main-color) 0%,
+        var(--main-color) calc(50% - 1px),
+        var(--white-color) calc(50% - 1px), /* 中央線を白に変更 */
+        var(--white-color) calc(50% + 1px),
+        var(--main-color) calc(50% + 1px),
+        var(--main-color) 100%
+    );
+}
+
+/* スライダーのつまみのスタイル (Chrome, Safari, Edge) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;  /* 少し大きく */
+    height: 22px; /* 少し大きく */
+    background: var(--accent-color); /* つまみの色をアクセントカラーに */
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid var(--white-color); /* 白い枠線を追加 */
+    box-shadow: 0 0 5px rgba(0,0,0,0.2); /* 影を追加 */
+    margin-top: -7px; 
+}
+
+/* スライダーのつまみのスタイル (Firefox) */
+.slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    background: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid var(--white-color);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* --- 4文字のタイプコード用のスタイル --- */
+.type-code {
+    font-family: 'Noto Sans Mono', monospace; /* モノスペースフォントを指定 */
+    background-color: var(--base-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+/* --- index.html タイプ一覧セクション --- */
+#type-list-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--light-gray);
+}
+
+#type-list-section h2 {
+    font-size: 1.6em;
+    color: var(--main-color);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.type-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 20px;
+}
+
+.type-card {
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.3s;
+    background-color: var(--white-color);
+}
+
+.type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.type-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.type-card-name {
+    padding: 10px;
+    text-align: center;
+}
+
+.type-card-name .type-code {
+    font-size: 1.1em;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.type-card-name p {
+    font-size: 0.9em;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* --- index.html メインタイトルのスタイル --- */
+.main-title {
+    line-height: 1.4;
+}
+.en-title {
+    display: block;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 1.4em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+}
+
+/* --- index.html 説明セクションのスタイル --- */
+#description-section {
+    margin-top: 50px;
+    padding: 30px 20px;
+    border-top: 1px solid var(--light-gray);
+}
+#description-section h2 {
+    font-size: 1.6em;
+    color: var(--main-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+.axis-description {
+    background-color: var(--base-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+.axis-description p {
+    margin: 10px 0;
+    font-size: 1em;
+}
+
+/* --- index.html 軸説明の英語表記 --- */
+.axis-en {
+    display: block;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* 2x2のグリッド設定 */
+.compatibility-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2つの列を均等に配置 */
+    gap: 20px; /* カード間の余白 */
+}
+
+/* 各相性カードのスタイル */
+.compat-card {
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+}
+
+/* 相性カードの見出し */
+.compat-card h4 {
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 10px;
+}
+
+/* 「良い相性」の見出しの色 */
+.good-compat h4 {
+    color: #28a745; /* 緑色系 */
+}
+
+/* 「悪い相性」の見出しの色 */
+.bad-compat h4 {
+    color: #dc3545; /* 赤色系 */
+}
+
+/* パートナー情報のスタイル */
+.partner-profile {
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: transform 0.2s;
+}
+
+.partner-profile:hover {
+    transform: scale(1.05); /* 少し拡大するアニメーション */
+}
+
+.partner-profile img {
+    width: 80px; /* 画像を小さめに */
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.partner-profile .type-code {
+    font-size: 1em;
+    padding: 2px 6px;
+}
+
+.partner-profile p {
+    font-size: 0.9em;
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+/* 相性解説文のスタイル */
+.compat-description {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* --- スマートフォン用の調整 --- */
+@media (max-width: 600px) {
+    /* グリッドを縦一列に変更 */
+    .compatibility-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- 結果ページ 相性セクション（リファクタリング後） --- */
+.result-content .compatibility-grid {
+    margin-top: 50px; /* アドバイス文との間に余白を確保 */
+    padding-top: 30px;
+    border-top: 1px solid var(--light-gray);
+}
+
+/* --- 更新履歴 --- */
+#update-history {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--light-gray);
+}
+#update-history h2 {
+    text-align: center;
+    font-size: 1.6em;
+    color: var(--main-color);
+    margin-bottom: 20px;
+}
+#update-history ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+#update-history li {
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+/* --- シェアボタンのスタイル --- */
+.share-buttons {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: var(--base-color);
+    border-radius: 8px;
+}
+.share-buttons p {
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+.share-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    color: var(--white-color);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+}
+.share-button:hover {
+    opacity: 0.8;
+}
+.share-button.twitter {
+    background-color: #000000; /* Xのブランドカラー */
+}
+.share-button.line {
+    background-color: #06C755; /* LINEのブランドカラー */
+}
+
+/* --- ポータルTOPページ用のスタイル --- */
+.portal-header {
+    text-align: center;
+    margin: 30px 0 50px 0;
+}
+.portal-header .main-title .en-title {
+    font-size: 2.5em; /* メインタイトルを大きく */
+}
+.portal-header p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.portal-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap; /* スマホで折り返す */
+}
+
+.nav-card {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    padding: 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--white-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.nav-card h3 {
+    font-size: 1.6em;
+    margin: 0 0 10px 0;
+    line-height: 1.4;
+}
+
+.nav-card p {
+    font-size: 1em;
+    margin: 0;
+    opacity: 0.9;
+}
+
+/* 教師版カードの背景色 */
+.teacher-card {
+    background: var(--main-color); /* ネイビー */
+}
+
+/* 生徒版カードの背景色（仮） */
+.student-card {
+    background: #6c757d; /* グレー */
+}
+
+/* 準備中バナーのスタイル */
+.coming-soon {
+    cursor: not-allowed;
+}
+.coming-soon-banner {
+    position: absolute;
+    top: 15px;
+    right: -40px;
+    background-color: var(--accent-color);
+    color: var(--main-color);
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-weight: bold;
+    font-size: 0.9em;
+}
