@@ -1,0 +1,9 @@
+/* --- 生徒版専用の配色 --- */
+:root {
+    --base-color: #F8F8F8;
+    --main-color: #FF7F50;      /* メインカラー：コーラルピンク */
+    --accent-color: #98FF98;     /* アクセントカラー：ミントグリーン */
+    --text-color: #333333;
+    --white-color: #FFFFFF;
+    --light-gray: #dddddd;
+}

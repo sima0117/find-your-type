@@ -582,7 +582,7 @@ main p {
 
 /* 生徒版カードの背景色（仮） */
 .student-card {
-    background: #6c757d; /* グレー */
+    background: var(--main-color); /* ネイビー */
 }
 
 /* 準備中バナーのスタイル */
@@ -599,4 +599,18 @@ main p {
     transform: rotate(45deg);
     font-weight: bold;
     font-size: 0.9em;
+}
+
+/* --- New! バナーのスタイル --- */
+.new-banner {
+    position: absolute;
+    top: 15px;
+    right: -40px;
+    background-color: #dc3545; /* 目立つ赤色 */
+    color: var(--white-color);
+    padding: 5px 40px;
+    transform: rotate(45deg);
+    font-weight: bold;
+    font-size: 0.9em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
