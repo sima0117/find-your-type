@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
     });
     // フォームに生成したHTMLと送信ボタンを追加
-    form.innerHTML = questionsHtml + '<button type="submit" class="button-link">診断結果を見る</button>';
+    form.innerHTML = questionsHtml + '<button type="submit" class="button-link">診断する</button>';
 
     // --- フォーム送信時の処理 ---
     form.addEventListener('submit', function(event) {

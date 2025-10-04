@@ -1,42 +1,36 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // --- バイブレーション関数 ---
-    // 引数で指定された時間（ミリ秒）だけ振動させる
-    // ブラウザがVibration APIに対応していない場合は何もしない
     function triggerVibration(duration = 10) {
         if (navigator.vibrate) {
             navigator.vibrate(duration);
         }
     }
 
-    // --- ボタンへの適用 ---
-    // 'button-link'クラスを持つ全ての要素を取得
-    const buttons = document.querySelectorAll('.button-link');
-    buttons.forEach(button => {
-        // 各ボタンがクリックされた時に、50ミリ秒の振動を発生させる
-        button.addEventListener('click', function() {
+    // --- ボタンへの適用（イベントデリゲーション） ---
+    // document全体でクリックを監視し、クリックされた要素が対象クラスを持つか判定
+    document.addEventListener('click', function(e) {
+        // .button-link または .nav-card を持つ要素、あるいはその子要素がクリックされた場合
+        if (e.target.closest('.button-link, .nav-card')) {
             triggerVibration(50);
-        });
+        }
     });
 
-    // --- スライダーへの適用 ---
-    // 'slider'クラスを持つ全ての要素を取得
-    const sliders = document.querySelectorAll('.slider');
-    let lastSliderValue = {}; // 各スライダーの直前の値を保持するオブジェクト
+    // --- スライダーへの適用（イベントデリゲーション） ---
+    // document全体でスライダーの動きを監視
+    document.addEventListener('input', function(e) {
+        // イベントを発生させた要素が.sliderクラスを持っているか判定
+        if (e.target.classList.contains('slider')) {
+            const slider = e.target;
+            // このスライダー用の直前の値を、要素自体に保存（なければ初期化）
+            const lastValue = slider.dataset.lastValue || slider.value;
 
-    sliders.forEach((slider, index) => {
-        // 各スライダーにユニークなIDがない場合でも識別できるように、インデックスをキーとして使用
-        const sliderId = slider.name || `slider-${index}`;
-        lastSliderValue[sliderId] = slider.value;
-
-        // スライダーが動かされている間、連続してイベントが発生
-        slider.addEventListener('input', function() {
-            // 値が変化した瞬間だけ振動させる（押しっぱなしでの連続振動を防ぐ）
-            if (this.value !== lastSliderValue[sliderId]) {
+            if (slider.value !== lastValue) {
                 triggerVibration(20); // 短い「コツッ」という感触
-                lastSliderValue[sliderId] = this.value;
+                // 現在の値を「直前の値」として要素に保存
+                slider.dataset.lastValue = slider.value;
             }
-        });
+        }
     });
 
 });
