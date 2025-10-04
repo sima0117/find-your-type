@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p class="question-text">${q}</p>
                 <div class="slider-container">
                     <span class="slider-label">同意しない</span>
-                    <input type="range" name="q${qNum}" min="0" max="10" step="1" value="5" class="slider">
+                    <input type="range" name="q${qNum}" min="0" max="10" step="1" value="5" class="slider" data-last-value="5">
                     <span class="slider-label">同意する</span>
                 </div>
             </div>
