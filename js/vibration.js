@@ -23,36 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const sliders = document.querySelectorAll('.slider');
 
         sliders.forEach(slider => {
-            
-            // ドラッグ中の処理を定義
-            const onPointerMove = () => {
-                // 現在の値と直前の値を比較
-                if (slider.value !== slider.dataset.lastValue) {
-                    triggerVibration(10);
-                }
-                // 直前の値を更新
-                slider.dataset.lastValue = slider.value;
-            };
-
-            // つまみを掴んだ瞬間の処理
-            slider.addEventListener('pointerdown', () => {
-                // まずは直前の値を記録
-                slider.dataset.lastValue = slider.value;
-                // ドラッグ中のイベント監視を開始
-                slider.addEventListener('pointermove', onPointerMove);
-            });
-
-            // つまみを離した瞬間の処理
-            slider.addEventListener('pointerup', () => {
-                // ドラッグ中のイベント監視を終了（負荷軽減のため）
-                slider.removeEventListener('pointermove', onPointerMove);
-            });
-            
-            // つまみからカーソルが外れた場合も監視を終了
-            slider.addEventListener('pointerleave', () => {
-                slider.removeEventListener('pointermove', onPointerMove);
+            // 各スライダーに対して、値が変化したことを検知する 'input' イベントリスナーを直接設定
+            slider.addEventListener('input', () => {
+                triggerVibration(10);
             });
         });
 
-    }, 100);
+    }, 100); // 念のため、0.1秒の僅かな待機時間を設ける
 });
