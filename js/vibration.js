@@ -45,3 +45,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100); // 念のため、0.1秒の僅かな待機時間を設ける
 
 });
+
+// スライダーへの適用
+document.addEventListener('input', function(e) {
+    if (e.target.classList.contains('slider')) {
+        const slider = e.target;
+        if (slider.value !== slider.dataset.lastValue) {
+            triggerVibration(10);
+        }
+        slider.dataset.lastValue = slider.value;
+    }
+});
+
+// ★ 追加：つまみを掴んだ瞬間にも振動させる
+document.addEventListener('pointerdown', function(e) {
+    if (e.target.classList.contains('slider')) {
+        triggerVibration(30);
+    }
+});
