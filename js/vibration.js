@@ -5,41 +5,73 @@ function triggerVibration(duration = 10) {
     }
 }
 
+// スライダーにバイブレーション機能を設定する関数
+function setupSliderVibration(slider) {
+    // 既に設定済みの場合はスキップ
+    if (slider.dataset.vibrationSetup === 'true') {
+        return;
+    }
+    
+    // 初期値を記録
+    slider.dataset.lastValue = slider.value;
+    slider.dataset.vibrationSetup = 'true';
+    
+    // touchstartで初期化（ブラウザのバイブレーション許可を得る）
+    slider.addEventListener('touchstart', () => {
+        triggerVibration(1); // 極めて短い振動
+    }, { passive: true });
+
+    // inputイベントで値の変更を検知して振動
+    slider.addEventListener('input', () => {
+        if (slider.value !== slider.dataset.lastValue) {
+            triggerVibration(10);
+            slider.dataset.lastValue = slider.value;
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 他の全ての初期化処理が終わった後に実行する
-    setTimeout(function() {
-
-        // --- 静的なボタンへの適用 ---
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.button-link, .nav-card')) {
-                if (e.target.type !== 'submit') {
-                    triggerVibration(20);
-                }
+    // --- 静的なボタンへの適用 ---
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.button-link, .nav-card')) {
+            if (e.target.type !== 'submit') {
+                triggerVibration(20);
             }
-        });
+        }
+    });
 
-        // --- スライダーへの最終適用ロジック ---
-        const sliders = document.querySelectorAll('.slider');
-
-        sliders.forEach(slider => {
-            // 初期値を記録
-            slider.dataset.lastValue = slider.value;
-            
-            // 【重要】touchstartで「無音の振動」を発生させ、バイブレーション許可を得る
-            slider.addEventListener('touchstart', () => {
-                triggerVibration(1); // 極めて短い振動で初期化（ほぼ感じない）
-            }, { passive: true });
-
-            // inputイベントで値の変更を検知して振動
-            slider.addEventListener('input', () => {
-                if (slider.value !== slider.dataset.lastValue) {
-                    triggerVibration(10);
-                    slider.dataset.lastValue = slider.value;
+    // --- スライダーの動的監視 ---
+    // MutationObserverでDOM変更を監視し、新しいスライダーを自動検知
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                // 追加されたノードがエレメントの場合
+                if (node.nodeType === 1) {
+                    // ノード自体がスライダーの場合
+                    if (node.classList && node.classList.contains('slider')) {
+                        setupSliderVibration(node);
+                    }
+                    // ノードの子孫にスライダーがある場合
+                    const sliders = node.querySelectorAll && node.querySelectorAll('.slider');
+                    if (sliders) {
+                        sliders.forEach(setupSliderVibration);
+                    }
                 }
             });
         });
+    });
 
-    }, 100); 
+    // body全体を監視対象にする
+    observer.observe(document.body, {
+        childList: true,    // 子ノードの追加・削除を監視
+        subtree: true       // 子孫ノード全体を監視
+    });
+
+    // 既存のスライダーにも適用（念のため）
+    setTimeout(() => {
+        const existingSliders = document.querySelectorAll('.slider');
+        existingSliders.forEach(setupSliderVibration);
+    }, 100);
 
 });
