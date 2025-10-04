@@ -20,23 +20,23 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         // --- スライダーへの最終適用ロジック ---
-        // ページ上にある全てのスライダーを取得
         const sliders = document.querySelectorAll('.slider');
 
-        // 見つけ出したスライダー、一つ一つに対して処理を行う
         sliders.forEach(slider => {
-            
-            // 1. まず、JavaScriptで初期値を強制的に記録する
+            // 初期値を記録
             slider.dataset.lastValue = slider.value;
+            
+            // 【重要】touchstartで「無音の振動」を発生させ、バイブレーション許可を得る
+            slider.addEventListener('touchstart', () => {
+                triggerVibration(1); // 極めて短い振動で初期化（ほぼ感じない）
+            }, { passive: true });
 
-            // 2. その後、スライダーごとにイベントリスナーを直接設定する
+            // inputイベントで値の変更を検知して振動
             slider.addEventListener('input', () => {
-                // 現在の値と、記録された「直前の値」を比較
                 if (slider.value !== slider.dataset.lastValue) {
-                    triggerVibration(10); // 違う場合のみ振動させる
+                    triggerVibration(10);
+                    slider.dataset.lastValue = slider.value;
                 }
-                // 現在の値を「直前の値」として更新し、次のイベントに備える
-                slider.dataset.lastValue = slider.value;
             });
         });
 
