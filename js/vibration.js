@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.closest('.button-link, .nav-card')) {
             // 診断ボタンは診断スクリプト側で個別に制御するため除外
             if (e.target.type !== 'submit') {
-                triggerVibration(200);
+                triggerVibration(20);
             }
         }
     });
