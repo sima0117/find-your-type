@@ -30,16 +30,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('quiz-form');
     if (!form) return;
 
+    // --- 質問フォームを動的に生成 ---
     let questionsHtml = '';
-
     questions.forEach((q, index) => {
         const qNum = index + 1;
         questionsHtml += `
             <div class="question-block">
-                <div class="question-text">
-                    <span class="question-number">質問${qNum}:</span>
-                    <span class="question-content">${q}</span>
-                </div>
+                <p class="question-number">質問 ${qNum}/24</p>
+                <p class="question-text">${q}</p>
                 <div class="slider-container">
                     <span class="slider-label">同意しない</span>
                     <input type="range" name="q${qNum}" min="0" max="10" step="1" value="5" class="slider">

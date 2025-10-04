@@ -1,0 +1,15 @@
+/* --- ゲーマー版専用の配色 --- */
+:root {
+    --base-color: #F8F8F8;
+    --main-color: #6A0DAD;      /* メインカラー：エレクトリックパープル */
+    --accent-color: #00D1FF;     /* アクセントカラー：ネオンブルー */
+    --text-color: #333333;
+    --white-color: #FFFFFF;
+    --light-gray: #dddddd;
+}
+
+/* GT16の結果ページ画像のみ、丸い切り抜きを解除する */
+.result-image-container img {
+    border-radius: 15px; 
+    border: 5px solid var(--light-gray);
+}
