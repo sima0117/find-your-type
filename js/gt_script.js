@@ -95,6 +95,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const finalType = resultType1 + resultType2 + resultType3 + resultType4;
         
-        window.location.href = 'gt_type/' + finalType + '.html'; 
+        triggerVibration(50); // まず振動させる
+        setTimeout(() => {   // 少し待ってからページを移動する
+            window.location.href = 'gt_type/' + finalType + '.html'; 
+        }, 100); // 100ミリ秒（0.1秒）待つ
     });
 });
