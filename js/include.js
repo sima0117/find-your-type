@@ -46,8 +46,30 @@ document.addEventListener("DOMContentLoaded", function() {
     if (shareTwitter && shareLine) {
         const pageUrl = window.location.href;
         const pageTitle = document.title;
-        const shareText = `私の教師タイプは『${pageTitle}』でした！ あなたも診断してみよう！ #教師のための16タイプ診断`;
+        
+        let shareIntro = '私のタイプは'; // デフォルトの文章
+        let hashtag = '#FindYourType'; // デフォルトのハッシュタグ
+        const path = window.location.pathname;
 
+        // URLのパスに 'tt_' が含まれる場合
+        if (path.includes('/tt_')) {
+            shareIntro = '私の教師タイプは';
+            hashtag = '#TeacherType16';
+        
+        // URLのパスに 'st_' が含まれる場合
+        } else if (path.includes('/st_')) {
+            shareIntro = '私の生徒タイプは';
+            hashtag = '#StudentType16';
+
+        // URLのパスに 'gt_' が含まれる場合
+        } else if (path.includes('/gt_')) {
+            shareIntro = '私のゲーマータイプは';
+            hashtag = '#GamerType16';
+        }
+
+        // 判定したテキストを元に、最終的なシェア文を組み立てる
+        const shareText = `${shareIntro}『${pageTitle}』でした！ あなたも診断してみよう！ ${hashtag}`;
+        
         shareTwitter.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
         shareLine.href = `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
     }
