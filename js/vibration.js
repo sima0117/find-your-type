@@ -16,6 +16,30 @@ document.addEventListener('DOMContentLoaded', function() {
         // 各スライダーの「最初の値」を強制的に記録する
         sliders.forEach(slider => {
             slider.dataset.lastValue = slider.value;
+
+            // ▼ スライダーごとに直接イベントを登録 ▼
+
+            // つまみを掴んだ瞬間（pointerdown / touchstart）
+            slider.addEventListener('pointerdown', () => {
+                triggerVibration(30);
+            });
+
+            slider.addEventListener('touchstart', () => {
+                triggerVibration(30);
+            }, { passive: true });
+
+            // 値が変わったとき（input）
+            slider.addEventListener('input', () => {
+                if (slider.value !== slider.dataset.lastValue) {
+                    triggerVibration(10);
+                }
+                slider.dataset.lastValue = slider.value;
+            });
+
+            // 値を確定したとき（change）
+            slider.addEventListener('change', () => {
+                triggerVibration(20);
+            });
         });
 
         // --- イベントリスナーの設定 ---
@@ -26,37 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (e.target.type !== 'submit') {
                     triggerVibration(20);
                 }
-            }
-        });
-
-        // スライダーへの適用（値が変わった時）
-        document.addEventListener('input', function(e) {
-            if (e.target.classList.contains('slider')) {
-                const slider = e.target;
-                
-                if (slider.value !== slider.dataset.lastValue) {
-                    triggerVibration(10);
-                }
-                
-                slider.dataset.lastValue = slider.value;
-            }
-        });
-
-        document.addEventListener('pointerdown', function(e) {
-            if (e.target.classList.contains('slider')) {
-                triggerVibration(30);
-            }
-        });
-
-        document.addEventListener('touchstart', function(e) {
-            if (e.target.classList.contains('slider')) {
-                triggerVibration(30);
-            }
-        }, { passive: true });
-
-        document.addEventListener('focusin', function(e) {
-            if (e.target.classList.contains('slider')) {
-                triggerVibration(30);
             }
         });
 
