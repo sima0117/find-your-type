@@ -1,43 +1,53 @@
 // 他のスクリプトからも呼び出せるように、グローバルな関数として定義
-function triggerVibration(duration = 20) {
+function triggerVibration(duration = 10) {
     if (navigator.vibrate) {
         navigator.vibrate(duration);
     }
 }
 
-// DOMContentLoadedは、HTMLの読み込みが完了した時点で発火する
 document.addEventListener('DOMContentLoaded', function() {
     
-    // setTimeoutを使い、他の処理が終わった後で実行されるようにする
+    // 他の処理が完了した後にイベントリスナーを設定
     setTimeout(function() {
 
         // --- 静的なボタンへの適用 ---
         document.addEventListener('click', function(e) {
             if (e.target.closest('.button-link, .nav-card')) {
-                // 診断ボタンは診断スクリプト側で個別に制御するため除外
                 if (e.target.type !== 'submit') {
-                    triggerVibration(50);
+                    // ユーザー設定の振動時間（ボタン用）
+                    triggerVibration(20);
                 }
             }
         });
 
-        // --- スライダーへの適用 ---
+        // --- スライダーへの適用（ロジック改良版） ---
+        
+        // スライダーを「押し込んだ」瞬間に、現在の値を記録する関数
+        function primeSlider(event) {
+            if (event.target.classList.contains('slider')) {
+                event.target.dataset.lastValue = event.target.value;
+            }
+        }
+
+        // PCでのマウス操作に対応
+        document.addEventListener('mousedown', primeSlider);
+        // スマホでのタッチ操作に対応
+        document.addEventListener('touchstart', primeSlider);
+
+        // スライダーが「動かされた」瞬間に、値の変化を比較して振動させる
         document.addEventListener('input', function(e) {
             if (e.target.classList.contains('slider')) {
                 const slider = e.target;
                 
-                // 現在の値と、要素に保存された「直前の値」を比較
                 if (slider.value !== slider.dataset.lastValue) {
-                    // ユーザーが変更した数値を反映して振動時間を調整
-                    const changedValue = slider.dataset.lastValue ? Math.abs(slider.value - slider.dataset.lastValue) : 1;
-                    triggerVibration(10 + changedValue); // 最小11ms, 最大20ms
+                    // ユーザー設定の振動時間（スライダー用）
+                    triggerVibration(10);
                 }
-
-                // 現在の値を「直前の値」として要素に保存し、次のイベントに備える
+                
+                // 現在の値を次の比較のために保存
                 slider.dataset.lastValue = slider.value;
             }
         });
 
-    }, 0); // 0ミリ秒後に実行するが、実際には他の処理の後になる
-
+    }, 0);
 });
