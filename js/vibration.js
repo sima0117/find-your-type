@@ -7,44 +7,10 @@ function triggerVibration(duration = 10) {
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 他の全ての初期化処理が終わった後に、満を持して実行する
+    // 他の全ての初期化処理が終わった後に実行する
     setTimeout(function() {
 
-        // --- スライダーの初期化 ---
-        // ページ上にある全てのスライダーを取得
-        const sliders = document.querySelectorAll('.slider');
-        // 各スライダーの「最初の値」を強制的に記録する
-        sliders.forEach(slider => {
-            slider.dataset.lastValue = slider.value;
-
-            // ▼ スライダーごとに直接イベントを登録 ▼
-
-            // つまみを掴んだ瞬間（pointerdown / touchstart）
-            slider.addEventListener('pointerdown', () => {
-                triggerVibration(30);
-            });
-
-            slider.addEventListener('touchstart', () => {
-                triggerVibration(30);
-            }, { passive: true });
-
-            // 値が変わったとき（input）
-            slider.addEventListener('input', () => {
-                if (slider.value !== slider.dataset.lastValue) {
-                    triggerVibration(10);
-                }
-                slider.dataset.lastValue = slider.value;
-            });
-
-            // 値を確定したとき（change）
-            slider.addEventListener('change', () => {
-                triggerVibration(20);
-            });
-        });
-
-        // --- イベントリスナーの設定 ---
-
-        // 静的なボタンへの適用
+        // --- 静的なボタンへの適用 ---
         document.addEventListener('click', function(e) {
             if (e.target.closest('.button-link, .nav-card')) {
                 if (e.target.type !== 'submit') {
@@ -53,6 +19,40 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-    }, 100); // 念のため、0.1秒の僅かな待機時間を設ける
+        // --- スライダーへの新しい適用ロジック ---
+        const sliders = document.querySelectorAll('.slider');
 
+        sliders.forEach(slider => {
+            
+            // ドラッグ中の処理を定義
+            const onPointerMove = () => {
+                // 現在の値と直前の値を比較
+                if (slider.value !== slider.dataset.lastValue) {
+                    triggerVibration(10);
+                }
+                // 直前の値を更新
+                slider.dataset.lastValue = slider.value;
+            };
+
+            // つまみを掴んだ瞬間の処理
+            slider.addEventListener('pointerdown', () => {
+                // まずは直前の値を記録
+                slider.dataset.lastValue = slider.value;
+                // ドラッグ中のイベント監視を開始
+                slider.addEventListener('pointermove', onPointerMove);
+            });
+
+            // つまみを離した瞬間の処理
+            slider.addEventListener('pointerup', () => {
+                // ドラッグ中のイベント監視を終了（負荷軽減のため）
+                slider.removeEventListener('pointermove', onPointerMove);
+            });
+            
+            // つまみからカーソルが外れた場合も監視を終了
+            slider.addEventListener('pointerleave', () => {
+                slider.removeEventListener('pointermove', onPointerMove);
+            });
+        });
+
+    }, 100);
 });
