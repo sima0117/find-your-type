@@ -40,13 +40,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 <p class="question-text">${q}</p>
                 <div class="slider-container">
                     <span class="slider-label">同意しない</span>
-                    <input type="range" name="q${qNum}" min="0" max="10" step="1" value="5" class="slider" data-last-value="-1">
+                    <!-- 初期値は0にしておく -->
+                    <input type="range" name="q${qNum}" min="0" max="10" step="1" value="0" class="slider" data-last-value="-1">
                     <span class="slider-label">同意する</span>
                 </div>
             </div>
         `;
     });
     form.innerHTML = questionsHtml + '<button type="submit" id="submit-button">診断する</button>';
+
+    // --- スライダーの初期値をJSで中央(5)に設定 ---
+    document.querySelectorAll('.slider').forEach(slider => {
+        slider.value = 5;
+        slider.dataset.lastValue = 5;
+    });
 
     form.addEventListener('submit', function(event) {
         event.preventDefault();
