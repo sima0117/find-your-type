@@ -42,8 +42,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // ★追加：スライダーのつまみを掴んだ瞬間にも振動させる
         document.addEventListener('pointerdown', function(e) {
+            if (e.target.classList.contains('slider')) {
+                triggerVibration(30);
+            }
+        });
+
+        document.addEventListener('touchstart', function(e) {
+            if (e.target.classList.contains('slider')) {
+                triggerVibration(30);
+            }
+        }, { passive: true });
+
+        document.addEventListener('focusin', function(e) {
             if (e.target.classList.contains('slider')) {
                 triggerVibration(30);
             }
