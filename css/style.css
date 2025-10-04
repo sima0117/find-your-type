@@ -111,6 +111,12 @@ main p {
     width: 100%;
 }
 
+/* スライダー操作中のアニメーションを強制的に無効化し、イベント阻害を防ぐ */
+.slider::-webkit-slider-thumb:active,
+.slider::-moz-range-thumb:active {
+    transition: none;
+}
+
 /* --- 結果ページのスタイル --- */
 #result-page header h1 {
     font-size: 1.8em;
