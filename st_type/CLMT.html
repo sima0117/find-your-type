@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>診断結果：CLMT - 知的冒険のリーダータイプ</title>
     
-    <meta property="og:url" content="https://xxx.com/st_type/CLMT.html" />
+    <meta property="og:url" content="https://findyourtype.onrender.com/st_type/CLMT.html" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="私の生徒タイプは【知的冒険のリーダータイプ】でした！ | Find Your Type" />
     <meta property="og:description" content="「みんなで解き明かそう。」知的好奇心を武器に、仲間と論理の冒険に挑む探求者。あなたも診断してみよう！" />
     <meta property="og:site_name" content="Find Your Type" />
-    <meta property="og:image" content="https://xxx.com/img/st_img/Character_CLMT.png" />
+    <meta property="og:image" content="https://findyourtype.onrender.com/img/st_img/Character_CLMT.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="stylesheet" href="../css/style.css"> 
@@ -47,8 +47,40 @@
                 <p>あなたの論理的なリーダーシップは、チームを知の深みへと導く力があります。その力をさらに伸ばすために、一見非論理的に思える仲間の発言も、「なぜそう思ったんだろう？」と、その背景にある意図を探るようにしてみましょう。そこには、あなたの論理だけではたどり着けない、直感的な真実が隠れているかもしれません。冒険の最初に「最終的なゴール（提出物）」をチームで確認しておくことで、あなたの知的な探求は、確かな評価にも繋がっていきます。</p>
 
                 <h3>５．他のタイプとの相性</h3>
-                <p style="text-align: center; color: #777;">（他の生徒や先生との相性診断は、現在準備中です。お楽しみに！）</p>
-                
+                <div class="compatibility-grid">
+                    <div class="compat-card good-compat">
+                        <h4>🤝 【響き合う二人】</h4>
+                        <a href="CIRS.html" class="partner-profile">
+                            <img src="../img/st_img/Character_CIRS.png" alt="独特の世界観を持つアーティストタイプ">
+                            <p><span class="type-code">CIRS</span>独特の世界観を持つアーティスト</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="resonate" data-partner-type="CIRS"></p>
+                    </div>
+                    <div class="compat-card good-compat">
+                        <h4>✨ 【鏡合わせの二人】</h4>
+                        <a href="CLRT.html" class="partner-profile">
+                            <img src="../img/st_img/Character_CLRT.png" alt="グループの知恵深き参謀タイプ">
+                            <p><span class="type-code">CLRT</span>グループの知恵深き参謀</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="inspire" data-partner-type="CLRT"></p>
+                    </div>
+                    <div class="compat-card neutral-compat">
+                        <h4>🌗 【光と影の二人】</h4>
+                        <a href="AIRS.html" class="partner-profile">
+                            <img src="../img/st_img/Character_AIRS.png" alt="帰宅部の天才タイプ">
+                            <p><span class="type-code">AIRS</span>帰宅部の天才</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="lightAndShadow" data-partner-type="AIRS"></p>
+                    </div>
+                    <div class="compat-card bad-compat">
+                        <h4>💧 【水と油の二人】</h4>
+                        <a href="ALMS.html" class="partner-profile">
+                            <img src="../img/st_img/Character_ALMS.png" alt="進学クラスの優等生タイプ">
+                            <p><span class="type-code">ALMS</span>進学クラスの優等生</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="incompatible" data-partner-type="ALMS"></p>
+                    </div>
+                </div>
             </section>
             
             <footer>
@@ -65,6 +97,7 @@
     <div id="footer-placeholder"></div>
 
     <script>const basePath = '../';</script>
+    <script src="../js/compat-data.js"></script>
     <script src="../js/include.js"></script>
 </body>
 </html>

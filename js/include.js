@@ -26,17 +26,31 @@ document.addEventListener("DOMContentLoaded", function() {
     if (typeof compatData !== 'undefined' && resultPage) {
         const selfType = resultPage.dataset.selfType;
         const descriptionElements = document.querySelectorAll('.compat-description');
+        const path = window.location.pathname;
 
-        descriptionElements.forEach(el => {
-            const compatType = el.dataset.compatType;
-            const partnerType = el.dataset.partnerType;
-            const key = [selfType, partnerType].sort().join('_');
-            if (compatData.teacherTeacher[compatType] && compatData.teacherTeacher[compatType][key]) {
-                el.innerHTML = compatData.teacherTeacher[compatType][key];
-            } else {
-                el.innerHTML = "解説文が見つかりませんでした。";
-            }
-        });
+        // URLパスから、'tt' or 'st' のどちらの診断かを判定
+        let diagnosisKey = null;
+        if (path.includes('/tt_')) {
+            diagnosisKey = 'teacherTeacher';
+        } else if (path.includes('/st_')) {
+            diagnosisKey = 'studentStudent';
+        }
+        // 将来的にgtを追加する場合はここに else if (path.includes('/gt_')) を追加
+
+        if (diagnosisKey) {
+            descriptionElements.forEach(el => {
+                const compatType = el.dataset.compatType;
+                const partnerType = el.dataset.partnerType;
+                const key = [selfType, partnerType].sort().join('_');
+                
+                // 動的に決定したキー（teacherTeacher or studentStudent）を使ってデータを参照
+                if (compatData[diagnosisKey] && compatData[diagnosisKey][compatType] && compatData[diagnosisKey][compatType][key]) {
+                    el.innerHTML = compatData[diagnosisKey][compatType][key];
+                } else {
+                    el.innerHTML = "解説文が見つかりませんでした。";
+                }
+            });
+        }
     }
 
     // --- シェアボタンのリンクを自動生成する機能 ---

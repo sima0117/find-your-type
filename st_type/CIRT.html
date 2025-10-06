@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>診断結果：CIRT - 平和を愛する相談役タイプ</title>
     
-    <meta property="og:url" content="https://xxx.com/st_type/CIRT.html" />
+    <meta property="og:url" content="https://findyourtype.onrender.com/st_type/CIRT.html" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="私の生徒タイプは【平和を愛する相談役タイプ】でした！ | Find Your Type" />
     <meta property="og:description" content="「うんうん、それで？」仲間の話を優しく聞き、クラスの和を保つみんなのカウンセラー。あなたも診断してみよう！" />
     <meta property="og:site_name" content="Find Your Type" />
-    <meta property="og:image" content="https://xxx.com/img/st_img/Character_CIRT.png" />
+    <meta property="og:image" content="https://findyourtype.onrender.com/img/st_img/Character_CIRT.png" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <link rel="stylesheet" href="../css/style.css"> 
@@ -47,8 +47,40 @@
                 <p>あなたの存在は、周りの人々にとって癒やしそのものです。その優しさを自分自身にも向けてあげましょう。時には、「今は自分の時間も大切にしたいから、ごめんね」と勇気を出して断ることも、長い目で見ればあなたと友達の良い関係を保つことに繋がります。また、あなたの意見は、周りを思いやる気持ちに満ちています。対立を恐れず、「みんなのために、私はこう思うな」と、そっと伝えてみてください。あなたの言葉は、きっとみんなの心に届くはずです。</p>
 
                 <h3>５．他のタイプとの相性</h3>
-                <p style="text-align: center; color: #777;">（他の生徒や先生との相性診断は, 現在準備中です。お楽しみに！）</p>
-                
+                <div class="compatibility-grid">
+                    <div class="compat-card good-compat">
+                        <h4>🤝 【響き合う二人】</h4>
+                        <a href="CLRS.html" class="partner-profile">
+                            <img src="../img/st_img/Character_CLRS.png" alt="静かに思考する哲学者タイプ">
+                            <p><span class="type-code">CLRS</span>静かに思考する哲学者</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="resonate" data-partner-type="CLRS"></p>
+                    </div>
+                    <div class="compat-card good-compat">
+                        <h4>✨ 【鏡合わせの二人】</h4>
+                        <a href="CIMT.html" class="partner-profile">
+                            <img src="../img/st_img/Character_CIMT.png" alt="みんなを巻き込む学校行事の企画者タイプ">
+                            <p><span class="type-code">CIMT</span>学校行事の企画者</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="inspire" data-partner-type="CIMT"></p>
+                    </div>
+                    <div class="compat-card neutral-compat">
+                        <h4>🌗 【光と影の二人】</h4>
+                        <a href="ALMS.html" class="partner-profile">
+                            <img src="../img/st_img/Character_ALMS.png" alt="進学クラスの優等生タイプ">
+                            <p><span class="type-code">ALMS</span>進学クラスの優等生</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="lightAndShadow" data-partner-type="ALMS"></p>
+                    </div>
+                    <div class="compat-card bad-compat">
+                        <h4>💧 【水と油の二人】</h4>
+                        <a href="AIRS.html" class="partner-profile">
+                            <img src="../img/st_img/Character_AIRS.png" alt="帰宅部の天才タイプ">
+                            <p><span class="type-code">AIRS</span>帰宅部の天才</p>
+                        </a>
+                        <p class="compat-description" data-compat-type="incompatible" data-partner-type="AIRS"></p>
+                    </div>
+                </div>
             </section>
             
             <footer>
@@ -65,6 +97,7 @@
     <div id="footer-placeholder"></div>
 
     <script>const basePath = '../';</script>
+    <script src="../js/compat-data.js"></script>
     <script src="../js/include.js"></script>
 </body>
 </html>

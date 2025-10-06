@@ -388,27 +388,60 @@ main p {
     margin-top: 5px;
 }
 
-/* 2x2のグリッド設定 */
+/* --- 相性セクション --- */
+
+/* グリッド全体のレイアウト */
 .compatibility-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2つの列を均等に配置 */
-    gap: 20px; /* カード間の余白 */
+    grid-template-columns: 1fr 1fr; /* PCでは2列表示 */
+    gap: 20px;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid var(--light-gray);
 }
 
-/* 各相性カードのスタイル */
+/* 各相性カードの基本スタイル */
 .compat-card {
     border: 1px solid var(--light-gray);
     border-radius: 12px;
     padding: 15px;
+    /* ↓子要素の順序(order)を制御するためにflexboxを指定 */
+    display: flex;
+    flex-direction: column; /* 子要素を縦に並べる */
+    align-items: center; /* 子要素を水平方向に中央揃え */
     text-align: center;
 }
 
-/* 相性カードの見出し */
+/* 相性カードの見出し (カテゴリ名) */
 .compat-card h4 {
-    margin: 0 0 15px 0;
-    font-size: 1.1em;
-    border-bottom: 1px solid var(--light-gray);
+    order: 1; /* 表示順：1番目 */
+    width: 100%; /* 下線がカード幅いっぱいに広がるように */
+    margin: 0 0 5px 0;
     padding-bottom: 10px;
+    border-bottom: 1px solid var(--light-gray);
+    font-size: 1.1em;
+}
+
+/* パートナーのプロフィール（画像と名前のリンク） */
+.compat-card .partner-profile {
+    order: 2; /* 表示順：2番目 */
+}
+
+/* 相性解説文（JavaScriptで挿入されるテキスト） */
+.compat-description {
+    order: 3; /* 表示順：3番目 */
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* --- スマートフォン用の調整 --- */
+@media (max-width: 600px) {
+    .compatibility-grid {
+        grid-template-columns: 1fr; /* スマホでは1列表示 */
+    }
 }
 
 /* 「良い相性」の見出しの色 */
@@ -450,30 +483,6 @@ main p {
     font-size: 0.9em;
     font-weight: bold;
     margin: 5px 0 0 0;
-}
-
-/* 相性解説文のスタイル */
-.compat-description {
-    font-size: 0.9em;
-    color: #555;
-    margin-top: 15px;
-    line-height: 1.6;
-    text-align: left;
-}
-
-/* --- スマートフォン用の調整 --- */
-@media (max-width: 600px) {
-    /* グリッドを縦一列に変更 */
-    .compatibility-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* --- 結果ページ 相性セクション（リファクタリング後） --- */
-.result-content .compatibility-grid {
-    margin-top: 50px; /* アドバイス文との間に余白を確保 */
-    padding-top: 30px;
-    border-top: 1px solid var(--light-gray);
 }
 
 /* --- 更新履歴 --- */
@@ -619,4 +628,19 @@ main p {
     font-weight: bold;
     font-size: 0.9em;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* 決定問の選択肢を縦に並べるためのスタイル */
+.decisive-options label {
+    display: block;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.decisive-options label:has(input:checked) {
+    background-color: var(--accent-color);
+    border-color: var(--main-color);
 }
