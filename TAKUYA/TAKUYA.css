@@ -46,21 +46,18 @@ h1 {
 
 .options {
     display: flex;
-    /* 選択肢を均等に配置 */
-    justify-content: space-around;
-    /* 小さい画面で折り返す */
-    flex-wrap: wrap; 
+    /* 常に縦並びにするため、flex-directionをcolumnに設定 */
+    flex-direction: column; 
+    align-items: stretch; /* 子要素が親の幅いっぱいに広がるように */
     gap: 10px; /* 選択肢間の隙間 */
 }
 
 .options label {
-    flex-grow: 1; /* 均等に幅を広げる */
+    width: 100%; /* 親要素の幅いっぱいに広げる */
     text-align: center; /* テキストを中央寄せ */
     cursor: pointer;
-    /* paddingはspanに移動 */
     border-radius: 5px;
     transition: background-color 0.2s;
-    min-width: 80px; /* 選択肢の最小幅を確保 */
 }
 
 .options input[type="radio"] {
@@ -70,7 +67,7 @@ h1 {
 /* 選択されていないspanのスタイル */
 .options span {
     display: block; /* label内でブロック要素として扱い、paddingを効かせる */
-    padding: 10px 15px; /* ここでpaddingを指定 */
+    padding: 12px 15px; /* ここでpaddingを指定 */
     border: 1px solid #ced4da; /* 未選択時の枠線 */
     border-radius: 20px; /* 角丸を適用 */
     color: #495057;
@@ -108,8 +105,8 @@ h1 {
     cursor: pointer;
     transition: background-color 0.2s;
     margin-top: 20px;
-    width: auto; /* 幅を自動調整に戻す */
-    display: inline-block; /* ボタンが中央にくるように */
+    width: auto; 
+    display: inline-block;
 }
 
 #submit-button:hover, #retry-button:hover {
@@ -131,22 +128,4 @@ h1 {
     font-size: 1.1em;
     color: #333;
     margin-top: 10px;
-}
-
-/* レスポンシブ調整 */
-@media (max-width: 480px) {
-    .container {
-        padding: 20px;
-    }
-    .options {
-        flex-direction: column; /* 非常に小さい画面では縦並び */
-        align-items: stretch; /* 幅いっぱいに広げる */
-    }
-    .options label {
-        width: 100%; /* 親要素の幅いっぱいに */
-        margin-bottom: 5px; /* 縦並びの隙間 */
-    }
-    .options span {
-        padding: 12px 15px; /* 縦並びで少し大きめに */
-    }
 }
