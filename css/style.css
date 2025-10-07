@@ -644,3 +644,74 @@ main p {
     background-color: var(--accent-color);
     border-color: var(--main-color);
 }
+
+/* --- スコア可視化グラフ --- */
+.score-visualizer-wrapper {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px 25px;
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* 各グラフ間の余白 */
+}
+
+.score-bar-container {
+    width: 100%;
+}
+
+.score-percentage {
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.score-bar {
+    width: 100%;
+    height: 12px;
+    /* background-color は削除し、こちらにグラデーションを適用 */
+    background: linear-gradient(90deg, #6c757d, #adb5bd); 
+    border-radius: 6px;
+    position: relative;
+}
+
+.score-bar-inner {
+    height: 100%;
+    background: transparent; /* 内側の背景は透明にする */
+    border-radius: 6px;
+    position: relative;
+}
+
+/* 診断タイプごとの色設定 (適用先を .score-bar に変更) */
+body.tt .score-bar { background: linear-gradient(90deg, #007BFF, #4ca9ff); }
+body.st .score-bar { background: linear-gradient(90deg, #FFC107, #ffd567); }
+body.gt .score-bar { background: linear-gradient(90deg, #28A745, #56c26f); }
+
+.score-bar-marker {
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border: 3px solid #6c757d; /* デフォルトの色 */
+    border-radius: 50%;
+    position: absolute;
+    right: -9px; /* マーカーの半径分だけ外側へ */
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* 診断タイプごとのマーカー色設定 */
+body.tt .score-bar-marker { border-color: #007BFF; }
+body.st .score-bar-marker { border-color: #FFC107; }
+body.gt .score-bar-marker { border-color: #28A745; }
+
+
+.score-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #555;
+}
